@@ -1,0 +1,28 @@
+const tokenAddress = '0x5efd26e9caa85d02000219d24827e6bfad2bc14f';
+const tokenSymbol = 'UKR';
+const tokenDecimals = 18;
+const tokenImage = 'https://i.pinimg.com/564x/c4/da/2a/c4da2a8e25f0d7c536b617bd2942bb2b--ukraine-flag-kiev-ukraine.jpg';
+
+try {
+  // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+  const wasAdded = await ethereum.request({
+    method: 'wallet_watchAsset',
+    params: {
+      type: 'ERC20', // Initially only supports ERC20, but eventually more!
+      options: {
+        address: tokenAddress, // The address that the token is at.
+        symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+        decimals: tokenDecimals, // The number of decimals in the token
+        image: tokenImage, // A string url of the token logo
+      },
+    },
+  });
+
+  if (wasAdded) {
+    console.log('Thanks for your interest!');
+  } else {
+    console.log('Your loss!');
+  }
+} catch (error) {
+  console.log(error);
+}
